@@ -194,7 +194,7 @@ export class AbstractEditor {
 
     this.optInCheckbox = document.createElement('input')
     this.optInCheckbox.setAttribute('type', 'checkbox')
-    this.optInCheckbox.setAttribute('style', 'margin: 0 10px 0 0;')
+    this.optInCheckbox.style.margin = '0 10px 0 0;' // csp
     this.optInCheckbox.classList.add('json-editor-opt-in')
 
     this.optInCheckbox.addEventListener('click', () => {
