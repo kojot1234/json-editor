@@ -32,7 +32,7 @@ export class AbstractTheme {
 
     const checkbox = document.createElement('input')
     checkbox.setAttribute('type', 'checkbox')
-    checkbox.setAttribute('style', 'margin: 0 10px 0 0;')
+    checkbox.style.margin = '0 10px 0 0;' // csp
     checkbox.setAttribute('id', formname + '-opt-in')
     checkbox.classList.add('json-editor-opt-in')
 
@@ -274,7 +274,8 @@ export class AbstractTheme {
   getHiddenLabel (text) {
     const el = document.createElement('label')
     el.textContent = text
-    el.setAttribute('style', 'position: absolute;width: 1px;height: 1px;padding: 0;margin: -1px;overflow: hidden;clip: rect(0,0,0,0);border: 0;')
+    // el.setAttribute('style', 'position: absolute;width: 1px;height: 1px;padding: 0;margin: -1px;overflow: hidden;clip: rect(0,0,0,0);border: 0;')
+    this._applyHiddenStyles(el)
     return el
   }
 
@@ -282,15 +283,27 @@ export class AbstractTheme {
     if (!element) {
       return
     }
-
-    element.setAttribute('style', 'position: absolute;width: 1px;height: 1px;padding: 0;margin: -1px;overflow: hidden;clip: rect(0,0,0,0);border: 0;')
+    // element.setAttribute('style', 'position: absolute;width: 1px;height: 1px;padding: 0;margin: -1px;overflow: hidden;clip: rect(0,0,0,0);border: 0;')
+    this._applyHiddenStyles(element)
   }
 
   getHiddenText (text) {
     const el = document.createElement('span')
     el.textContent = text
-    el.setAttribute('style', 'position: absolute;width: 1px;height: 1px;padding: 0;margin: -1px;overflow: hidden;clip: rect(0,0,0,0);border: 0;')
+    // el.setAttribute('style', 'position: absolute;width: 1px;height: 1px;padding: 0;margin: -1px;overflow: hidden;clip: rect(0,0,0,0);border: 0;')
+    this._applyHiddenStyles(el)
     return el
+  }
+
+  _applyHiddenStyles (el, styles) {
+    el.style.position = 'absolute'
+    el.style.width = '1px'
+    el.style.height = '1px'
+    el.style.padding = '0'
+    el.style.margin = '-1px'
+    el.style.overflow = 'hidden'
+    el.style.clip = 'rect(0,0,0,0)'
+    el.style.border = '0'
   }
 
   getRangeInput (min, max, step, description, formName) {
